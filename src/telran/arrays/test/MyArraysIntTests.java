@@ -1,26 +1,41 @@
 package telran.arrays.test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+import static java.util.Arrays.binarySearch;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
-
-class MyArraysIntTests {
-
+import static telran.arrays.MyArraysInt.*
+;class MyArraysIntTests {
+int [] array = {10, 20, 30, 40, 100};
 	@Test
 	void testAddNumber() {
-		//TODO
+		int [] expected = {10, 20, 30, 40, 100, -1};
+		assertArrayEquals(expected, addNumber(array, -1));
 	}
 
 	@Test
 	void testRemoveNumber() {
-		//TODO
+		int [] expNo10 = {20, 30, 40, 100};
+		int [] expNo100 = {10, 20, 30, 40};
+		int [] expNo30 = {10, 20, 40, 100};
+		assertArrayEquals(expNo10, removeNumber(array, 0));
+		assertArrayEquals(expNo100, removeNumber(array, 4));
+		assertArrayEquals(expNo30, removeNumber(array, 2));
+		assertArrayEquals(array, removeNumber(array, -2));
+		assertArrayEquals(array, removeNumber(array, 5));
 	}
 
 	@Test
 	void testInsertNumber() {
-		//TODO
+		int [] expInd0_1000 = {1000, 10, 20, 30, 40, 100};
+		int [] expInd5_1000 = {10, 20, 30, 40, 100, 1000};
+		int [] expInd2_1000 = {10, 20,  1000, 30, 40, 100};
+		assertArrayEquals(expInd0_1000, insertNumber(array, 0, 1000));
+		assertArrayEquals(expInd5_1000, insertNumber(array, 5, 1000));
+		assertArrayEquals(expInd2_1000, insertNumber(array, 2, 1000));
+		assertArrayEquals(array, insertNumber(array, -2, 1000));
+		assertArrayEquals(array, insertNumber(array, 6, 1000));
 	}
 	@Test
 	void testCopyOf() {
@@ -46,9 +61,12 @@ class MyArraysIntTests {
 	}
 	@Test
 	void testBinarySearchInt() {
-		//Arrays.binarySearch(int[] array,int number)
-		//TODO
-		//Write tests for standard method binarySearch of the class Arrays taking array of ints and int number
+		assertEquals(0, binarySearch(array, 10));
+		assertEquals(-1, binarySearch(array, 5));
+		assertEquals(2, binarySearch(array, 30));
+		assertEquals(-3, binarySearch(array, 25));
+		assertEquals(4, binarySearch(array, 100));
+		assertEquals(-6, binarySearch(array, 150));
 		
 	}
 	
